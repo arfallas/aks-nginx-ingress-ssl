@@ -93,7 +93,7 @@ az network public-ip show --ids $PUBLICIPID --query "[dnsSettings.fqdn]" --outpu
 #updating Helm Chart with DNS label
 NAMESPACE="ingress-basic"
 
-helm upgrade ingress-nginx ingress-nginx/ingress-nginx \
+helm upgrade nginx-ingress ingress-nginx/ingress-nginx \
   --namespace $NAMESPACE \
   --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"=$DNS_LABEL
 
