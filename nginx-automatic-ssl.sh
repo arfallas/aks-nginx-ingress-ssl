@@ -10,6 +10,7 @@ read -p 'AKS name: ' aksname
 
 echo 'what is the AKS resource group name'
 read -p 'AKS resource group: ' aksrg
+
 # ataching ACR to AKS cluster
 az aks update -n $aksname -g $aksrg --attach-acr $acrurl
 
@@ -18,7 +19,7 @@ az aks get-credentials -n $aksname -g $aksrg
 
 # Needed variables
 
-REGISTRY_NAME= $acrurl
+REGISTRY_NAME=$acrurl
 SOURCE_REGISTRY=k8s.gcr.io
 CONTROLLER_IMAGE=ingress-nginx/controller
 CONTROLLER_TAG=v1.0.4
@@ -43,7 +44,7 @@ az acr import --name $REGISTRY_NAME --source $CERT_MANAGER_REGISTRY/$CERT_MANAGE
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
 # Set variable for ACR location to use for pulling images
-ACR_URL= $acrurl
+ACR_URL=$acrurl
 
 # Use Helm to deploy an NGINX ingress controller on default namespace
 helm install nginx-ingress ingress-nginx/ingress-nginx \
