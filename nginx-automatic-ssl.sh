@@ -1,6 +1,6 @@
 {
 #Asking for ACR name
-echo 'Please Add your ACR URL below to import needed images:'
+echo 'Please Add your ACR NAME below to import needed images:(not url)'
 read -p 'ACR URL: ' acrurl
 
 echo 'Now we will attach your ACR to the AKS cluster'
@@ -44,7 +44,7 @@ az acr import --name $REGISTRY_NAME --source $CERT_MANAGER_REGISTRY/$CERT_MANAGE
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
 # Set variable for ACR location to use for pulling images
-ACR_URL=$acrurl
+ACR_URL="$acrurl.azurecr.io"
 
 # Use Helm to deploy an NGINX ingress controller on default namespace
 helm install nginx-ingress ingress-nginx/ingress-nginx \
